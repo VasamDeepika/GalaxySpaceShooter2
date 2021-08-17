@@ -2,15 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TripleShot : MonoBehaviour
+public class TripleShotAndPowerUp : MonoBehaviour
 {
     private float tripleShotPowerUp = 3.0f;
-    //Player player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //player = FindObjectOfType<Player>();
-    }
+    [SerializeField]
+    private int powerUpId;//0-TripleShot, 1-Speed, 2-Shields
 
     // Update is called once per frame
     void Update()
@@ -19,14 +15,23 @@ public class TripleShot : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //accessing the can
-        //player.canTripleShoot = true;
         if (collision.tag == "Player")
         {
             Player player = collision.GetComponent<Player>();
             if (player != null)
             {
-                player.TripleShotPowerUp();
+                if (powerUpId == 0)
+                {
+                    player.TripleShotPowerUp();
+                }
+                else if(powerUpId == 1)
+                {
+                    player.SpeedPowerUpON();
+                }
+                else if(powerUpId == 2)
+                {
+                    //shields
+                }
             }
             this.gameObject.SetActive(false);
         }

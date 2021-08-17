@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     public bool canTripleShoot = false;
+    public bool isSpeedPowerUpActive = false;//variable to know whether you collected the speed power up
     [SerializeField] float moveSpeed;
     [SerializeField] GameObject laserPrefab, tripleLaserPrefab;
     [SerializeField] float canfire;
@@ -20,8 +22,20 @@ public class Player : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * horizontal);
-        transform.Translate(Vector3.up * Time.deltaTime * moveSpeed * vertical);
+
+        //if speed power up enabled move 2x faster
+        //else normal speed
+
+        if (isSpeedPowerUpActive == true)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * 2.0f * horizontal);
+            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed * 2.0f * vertical);
+        }
+        else
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * horizontal);
+            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed * vertical);
+        }
 
 
         //Player Y Boundarys
@@ -76,6 +90,19 @@ public class Player : MonoBehaviour
     {
         canTripleShoot = true;
         StartCoroutine(TripleShotPowerdown());
+    }
+    
+    //method to enable SPEED power up  and power down
+    public void SpeedPowerUpON()
+    {
+        isSpeedPowerUpActive = true;
+        StartCoroutine(SpeedPowerDown());
+    }
+
+    public IEnumerator SpeedPowerDown()
+    {
+        yield return new WaitForSeconds(5.0f);
+        isSpeedPowerUpActive = false;
     }
     public IEnumerator TripleShotPowerdown()
     {
