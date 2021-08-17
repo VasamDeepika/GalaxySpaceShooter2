@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private float moveSpeed;
-    private float horiInput, vertiInput;
+    [SerializeField] float moveSpeed;
+    [SerializeField] GameObject laserPrefab;
+    [SerializeField] float canfire;
+    [SerializeField] float fireRate = 0.25f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,37 +16,40 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
-        horiInput = Input.GetAxis("Horizontal");
-        vertiInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * horiInput);
-        transform.Translate(Vector3.up * Time.deltaTime * moveSpeed * vertiInput);
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * horizontal);
+        transform.Translate(Vector3.up * Time.deltaTime * moveSpeed * vertical);
 
-        //player bounds in y direction
-        if(transform.position.y > 0)
+
+        //Player Y Boundarys
+        if (transform.position.y > 0)
         {
             transform.position = new Vector3(transform.position.x, 0, 0);
         }
-        else if(transform.position.y < -4.0f)
+        else if (transform.position.y < -4.1f)
         {
-            transform.position = new Vector3(transform.position.x, -4.0f, 0);
+            transform.position = new Vector3(transform.position.x, -4.1f, 0);
         }
-        //player bounds in x direction
-        /*if(transform.position.x>8.2f)
+        //Player X Boundarys
+        if (transform.position.x >= 10f)
         {
-            transform.position = new Vector3(8.2f, transform.position.y, 0);
+            transform.position = new Vector3(-10f, transform.position.y, 0);
         }
-        else if (transform.position.x < 8.2f)
+        else if (transform.position.x <= -10f)
         {
-            transform.position = new Vector3(-8.2f, transform.position.y, 0);
-        }*/
-        if (transform.position.x > -9.5f)
-        {
-            transform.position = new Vector3(9.5f, transform.position.y, 0);
+            transform.position = new Vector3(10f, transform.position.y, 0);
         }
-        else if (transform.position.x < 9.5f)
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
         {
-            transform.position = new Vector3(-9.5f, transform.position.y, 0);
+            if (Time.time > canfire)
+            {
+                Instantiate(laserPrefab, transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
+                canfire = Time.time + fireRate;
+            }
+
         }
     }
 }
