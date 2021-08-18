@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject enemyExplosion;
+    
     public float enemySpeed; //enemy speed
     Animator anim;
     // Start is called before the first frame update
@@ -31,8 +34,9 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 Destroy(transform.parent.gameObject);
             }
-            anim.SetTrigger("Explode");
-            //this.gameObject.SetActive(false);
+            
+            this.gameObject.SetActive(false);
+            Instantiate(enemyExplosion, transform.position, Quaternion.identity);
             collision.gameObject.SetActive(false);
         }
         else if(collision.tag == "Player")

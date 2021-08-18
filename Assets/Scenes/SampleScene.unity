@@ -501,6 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d229f75c3f64f4ba28dedc21c4fefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyExplosion: {fileID: 6121849767936881710, guid: 2a55768a745c2d441b34c538241a59c1, type: 3}
   enemySpeed: 1
 --- !u!60 &849465132
 PolygonCollider2D:
@@ -512,7 +513,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -708,7 +709,8 @@ MonoBehaviour:
   tripleLaserPrefab: {fileID: 2753737631916298397, guid: b87b745aaa3fccd4f96172f740ea41bc, type: 3}
   canfire: 1
   fireRate: 2
-  playerLives: 5
+  playerExplosion: {fileID: 7059744215688135494, guid: a58527a05c60b1840b0f82640fa2a150, type: 3}
+  playerLives: 1
 --- !u!60 &1275282809
 PolygonCollider2D:
   m_ObjectHideFlags: 0

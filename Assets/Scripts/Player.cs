@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] float canfire;
     [SerializeField] float fireRate = 0.25f;
 
+    public GameObject playerExplosion;
+
     public int playerLives = 5;
     // Start is called before the first frame update
     void Start()
@@ -96,6 +98,7 @@ public class Player : MonoBehaviour
         if(playerLives<1)
         {
             gameObject.SetActive(false);
+            Instantiate(playerExplosion, transform.position, Quaternion.identity);
         }
     }
     public void TripleShotPowerUp()
