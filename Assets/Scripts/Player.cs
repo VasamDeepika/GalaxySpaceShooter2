@@ -17,11 +17,19 @@ public class Player : MonoBehaviour
     public GameObject playerExplosion;
     public GameObject sheildGameObject;
 
-    public int playerLives = 5;
+    public int playerLives = 3;
+
+    private UIManager uIManager;
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
+        //UIManager = GameObject.FindObjectOfType<Canvas>();
+        uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        if(uIManager!=null)
+        {
+            uIManager.UpdateLives(playerLives);
+        }
     }
 
     // Update is called once per frame
@@ -105,8 +113,10 @@ public class Player : MonoBehaviour
         else
         {
             playerLives--;
+            uIManager.UpdateLives(playerLives);
             if (playerLives < 1)
             {
+
                 gameObject.SetActive(false);
                 Instantiate(playerExplosion, transform.position, Quaternion.identity);
             }
