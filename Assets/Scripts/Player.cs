@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     public bool canTripleShoot = false;
     public bool isSpeedPowerUpActive = false;//variable to know whether you collected the speed power up
+    public bool isShieldActice = false;
 
     [SerializeField] float moveSpeed;
     [SerializeField] GameObject laserPrefab, tripleLaserPrefab;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] float fireRate = 0.25f;
 
     public GameObject playerExplosion;
+    public GameObject sheildGameObject;
 
     public int playerLives = 5;
     // Start is called before the first frame update
@@ -94,11 +96,20 @@ public class Player : MonoBehaviour
     {
         //subtract 1 live from player lives
         //if live less than 1 destroy player
-        playerLives--;
-        if(playerLives<1)
+        //if player has shields do no damage
+        if(isShieldActice == true)
         {
-            gameObject.SetActive(false);
-            Instantiate(playerExplosion, transform.position, Quaternion.identity);
+            isShieldActice = false;
+            sheildGameObject.SetActive(false);
+        }
+        else
+        {
+            playerLives--;
+            if (playerLives < 1)
+            {
+                gameObject.SetActive(false);
+                Instantiate(playerExplosion, transform.position, Quaternion.identity);
+            }
         }
     }
     public void TripleShotPowerUp()
@@ -112,6 +123,11 @@ public class Player : MonoBehaviour
     {
         isSpeedPowerUpActive = true;
         StartCoroutine(SpeedPowerDown());
+    }
+    public void EnableSheild()
+    {
+        isShieldActice = true;
+        sheildGameObject.SetActive(true);
     }
 
     public IEnumerator SpeedPowerDown()
