@@ -385,24 +385,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1161456541 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5290597990179179643, guid: 5baea4fff836d6047be9ecf95adf27eb, type: 3}
-  m_PrefabInstance: {fileID: 5290597989058668518}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1161456542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161456541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d229f75c3f64f4ba28dedc21c4fefd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemySpeed: 3
 --- !u!1 &1275282805
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +489,7 @@ MonoBehaviour:
   tripleLaserPrefab: {fileID: 2753737631916298397, guid: b87b745aaa3fccd4f96172f740ea41bc, type: 3}
   canfire: 1
   fireRate: 2
+  playerLives: 5
 --- !u!60 &1275282809
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -707,6 +690,10 @@ PrefabInstance:
     - target: {fileID: 5290597990179179643, guid: 5baea4fff836d6047be9ecf95adf27eb, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290597990179179643, guid: 5baea4fff836d6047be9ecf95adf27eb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5baea4fff836d6047be9ecf95adf27eb, type: 3}

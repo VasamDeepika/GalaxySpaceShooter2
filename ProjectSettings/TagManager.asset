@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - TripleShot
+  - Enemy
+  - Laser
+  - SpeedPowerUp
   layers:
   - Default
   - TransparentFX

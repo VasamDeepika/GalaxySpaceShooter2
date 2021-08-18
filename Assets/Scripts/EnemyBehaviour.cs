@@ -19,7 +19,29 @@ public class EnemyBehaviour : MonoBehaviour
         //when the enemy off the screen on the bottom he needs to respawn with new random x position
         if (transform.position.y<-6.0f)
         {
-            transform.position = new Vector3(Random.Range(-8.0f, 8.0f),6.0f,0);
+            transform.position = new Vector3(Random.Range(-8.0f, 8.0f), 6.0f, 0);
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Laser")
+        {
+            if (collision.transform.parent != null)
+            {
+                Destroy(transform.parent.gameObject);
+            }
+            this.gameObject.SetActive(false);
+            collision.gameObject.SetActive(false);
+        }
+        else if(collision.tag == "Player")
+        {
+            //need to damage player
+            Player player = collision.GetComponent<Player>();
+            if(player!=null)
+            {
+                player.Damage();
+            }
+        }
+        this.gameObject.SetActive(false);
     }
 }

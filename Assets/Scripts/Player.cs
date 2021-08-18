@@ -7,10 +7,13 @@ public class Player : MonoBehaviour
 
     public bool canTripleShoot = false;
     public bool isSpeedPowerUpActive = false;//variable to know whether you collected the speed power up
+
     [SerializeField] float moveSpeed;
     [SerializeField] GameObject laserPrefab, tripleLaserPrefab;
     [SerializeField] float canfire;
     [SerializeField] float fireRate = 0.25f;
+
+    public int playerLives = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +47,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
         {
             Shoot();
-
         }
     }
 
@@ -84,6 +86,16 @@ public class Player : MonoBehaviour
             }
             
             canfire = Time.time + fireRate;
+        }
+    }
+    public void Damage()
+    {
+        //subtract 1 live from player lives
+        //if live less than 1 destroy player
+        playerLives--;
+        if(playerLives<1)
+        {
+            gameObject.SetActive(false);
         }
     }
     public void TripleShotPowerUp()
