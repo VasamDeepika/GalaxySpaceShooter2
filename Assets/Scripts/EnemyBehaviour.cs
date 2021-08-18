@@ -5,10 +5,11 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     public float enemySpeed; //enemy speed
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -30,7 +31,8 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 Destroy(transform.parent.gameObject);
             }
-            this.gameObject.SetActive(false);
+            anim.SetTrigger("Explode");
+            //this.gameObject.SetActive(false);
             collision.gameObject.SetActive(false);
         }
         else if(collision.tag == "Player")
@@ -42,6 +44,7 @@ public class EnemyBehaviour : MonoBehaviour
                 player.Damage();
             }
         }
-        this.gameObject.SetActive(false);
+        
+        //this.gameObject.SetActive(false);
     }
 }
