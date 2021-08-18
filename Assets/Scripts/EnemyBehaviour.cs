@@ -9,10 +9,12 @@ public class EnemyBehaviour : MonoBehaviour
     
     public float enemySpeed; //enemy speed
     Animator anim;
+
+    private UIManager uIManager;
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
             
             this.gameObject.SetActive(false);
             Instantiate(enemyExplosion, transform.position, Quaternion.identity);
+            uIManager.UpdateScore();
             collision.gameObject.SetActive(false);
         }
         else if(collision.tag == "Player")

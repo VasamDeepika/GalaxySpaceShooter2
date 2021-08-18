@@ -17,18 +17,27 @@ public class Player : MonoBehaviour
     public GameObject playerExplosion;
     public GameObject sheildGameObject;
 
+    private UIManager uIManager;
+    private GameManager gameManager;
+    private SpawnManager spawnManager;
+
     public int playerLives = 3;
 
-    private UIManager uIManager;
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
-        //UIManager = GameObject.FindObjectOfType<Canvas>();
         uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        spawnManager = GameObject.Find("SpawnMAnager").GetComponent<SpawnManager>();
+        
         if(uIManager!=null)
         {
             uIManager.UpdateLives(playerLives);
+        }
+        if(spawnManager!=null)
+        {
+            spawnManager.StartCoroutineFunctions();
         }
     }
 
@@ -116,9 +125,11 @@ public class Player : MonoBehaviour
             uIManager.UpdateLives(playerLives);
             if (playerLives < 1)
             {
-
-                gameObject.SetActive(false);
                 Instantiate(playerExplosion, transform.position, Quaternion.identity);
+                gameManager.gameOver = true;
+                uIManager.ShowGameOverScreen();
+                gameObject.SetActive(false);
+
             }
         }
     }
