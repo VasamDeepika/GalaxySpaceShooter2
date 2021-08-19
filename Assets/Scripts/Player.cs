@@ -23,6 +23,11 @@ public class Player : MonoBehaviour
 
     public int playerLives = 3;
 
+    AudioSource audioSource;
+    public AudioClip powerUpAudioClip;
+    public AudioClip laserShotClip;
+    public AudioClip explosionAudioClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +35,7 @@ public class Player : MonoBehaviour
         uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spawnManager = GameObject.Find("SpawnMAnager").GetComponent<SpawnManager>();
+        audioSource = GameObject.Find("SoundManager").GetComponent<AudioSource>();
         
         if(uIManager!=null)
         {
@@ -100,10 +106,14 @@ public class Player : MonoBehaviour
             if(canTripleShoot == true)
             {
                 Instantiate(tripleLaserPrefab, transform.position+ new Vector3(-1f, 1f, 0), Quaternion.identity); // tripleLaser Powerup
+                audioSource.clip = laserShotClip;
+                audioSource.Play();
             }
             else
             {
                 Instantiate(laserPrefab, transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
+                audioSource.clip = laserShotClip;
+                audioSource.Play();
             }
             
             canfire = Time.time + fireRate;
@@ -126,6 +136,8 @@ public class Player : MonoBehaviour
             if (playerLives < 1)
             {
                 Instantiate(playerExplosion, transform.position, Quaternion.identity);
+                audioSource.clip = explosionAudioClip;
+                audioSource.Play();
                 gameManager.gameOver = true;
                 uIManager.ShowGameOverScreen();
                 gameObject.SetActive(false);
@@ -135,6 +147,8 @@ public class Player : MonoBehaviour
     }
     public void TripleShotPowerUp()
     {
+        audioSource.clip = powerUpAudioClip;
+        audioSource.Play();
         canTripleShoot = true;
         StartCoroutine(TripleShotPowerdown());
     }
@@ -142,11 +156,15 @@ public class Player : MonoBehaviour
     //method to enable SPEED power up  and power down
     public void SpeedPowerUpON()
     {
+        audioSource.clip = powerUpAudioClip;
+        audioSource.Play();
         isSpeedPowerUpActive = true;
         StartCoroutine(SpeedPowerDown());
     }
     public void EnableSheild()
     {
+        audioSource.clip = powerUpAudioClip;
+        audioSource.Play();
         isShieldActice = true;
         sheildGameObject.SetActive(true);
     }

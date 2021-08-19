@@ -11,10 +11,14 @@ public class EnemyBehaviour : MonoBehaviour
     Animator anim;
 
     private UIManager uIManager;
+
+    AudioSource audioSource;
+    public AudioClip explosionAudioClip;
     // Start is called before the first frame update
     void Start()
     {
         uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        audioSource = GameObject.Find("SoundManager").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -39,6 +43,8 @@ public class EnemyBehaviour : MonoBehaviour
             
             this.gameObject.SetActive(false);
             Instantiate(enemyExplosion, transform.position, Quaternion.identity);
+            audioSource.clip = explosionAudioClip;
+            audioSource.Play();
             uIManager.UpdateScore();
             collision.gameObject.SetActive(false);
         }
