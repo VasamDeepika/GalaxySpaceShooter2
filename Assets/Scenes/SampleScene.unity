@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: 1
-  player: {fileID: 4806367416860129407, guid: 9227ab9d880cba24e9c08ef1daf3dfa3, type: 3}
+  player: {fileID: 3114326327296777436, guid: a76f8a0bdc7622242828a3aa9b07f5b5, type: 3}
   uIManager: {fileID: 252460081}
 --- !u!1 &145440296
 GameObject:

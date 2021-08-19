@@ -27,6 +27,12 @@ public class Player : MonoBehaviour
     public AudioClip powerUpAudioClip;
     public AudioClip laserShotClip;
     public AudioClip explosionAudioClip;
+    public AudioClip continousAudioClip;
+
+    [SerializeField]
+    private GameObject[] engines;
+
+    private int hitCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +51,9 @@ public class Player : MonoBehaviour
         {
             spawnManager.StartCoroutineFunctions();
         }
+        audioSource.clip = continousAudioClip;
+        audioSource.Play();
+        audioSource.playOnAwake = true;
     }
 
     // Update is called once per frame
@@ -124,6 +133,16 @@ public class Player : MonoBehaviour
         //subtract 1 live from player lives
         //if live less than 1 destroy player
         //if player has shields do no damage
+
+        hitCount++;
+        if(hitCount == 1)
+        {
+            engines[0].SetActive(true);
+        }
+        else if(hitCount==2)
+        {
+            engines[1].SetActive(true);
+        }
         if(isShieldActice == true)
         {
             isShieldActice = false;
