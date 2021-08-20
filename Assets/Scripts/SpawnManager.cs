@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
         while (gameManager.gameOver == false)
         {
             Instantiate(enemyPrefab, new Vector3(Random.Range(-8.0f, 8.0f), 6.0f, 0), Quaternion.identity);
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(10.0f);
         }
     }
     IEnumerator SpawnPowerUP()

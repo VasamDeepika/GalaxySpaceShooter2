@@ -13,15 +13,15 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject laserPrefab, tripleLaserPrefab;
     [SerializeField] float canfire;
     [SerializeField] float fireRate = 0.25f;
+    public int playerLives = 3;
 
     public GameObject playerExplosion;
     public GameObject sheildGameObject;
+    private GameObject[] engines;
 
     private UIManager uIManager;
     private GameManager gameManager;
     private SpawnManager spawnManager;
-
-    public int playerLives = 3;
 
     AudioSource audioSource;
     public AudioClip powerUpAudioClip;
@@ -30,8 +30,6 @@ public class Player : MonoBehaviour
     public AudioClip continousAudioClip;
 
     [SerializeField]
-    private GameObject[] engines;
-
     private int hitCount = 0;
 
     // Start is called before the first frame update
@@ -54,6 +52,7 @@ public class Player : MonoBehaviour
         audioSource.clip = continousAudioClip;
         audioSource.Play();
         audioSource.playOnAwake = true;
+        //audioSource.loop = true;
     }
 
     // Update is called once per frame
@@ -76,8 +75,6 @@ public class Player : MonoBehaviour
             transform.Translate(Vector3.up * Time.deltaTime * moveSpeed * vertical);
         }
 
-
-        //Player Y Boundarys
         PlayerMovements();
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
@@ -88,6 +85,7 @@ public class Player : MonoBehaviour
 
     private void PlayerMovements()
     {
+        //Player Y Boundarys
         if (transform.position.y > 0)
         {
             transform.position = new Vector3(transform.position.x, 0, 0);

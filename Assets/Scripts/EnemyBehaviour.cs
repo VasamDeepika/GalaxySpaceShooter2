@@ -14,6 +14,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     AudioSource audioSource;
     public AudioClip explosionAudioClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         //move down 
         transform.Translate(Vector3.down * Time.deltaTime * enemySpeed);
+
         //when the enemy off the screen on the bottom he needs to respawn with new random x position
         if (transform.position.y<-6.0f)
         {
@@ -57,8 +59,6 @@ public class EnemyBehaviour : MonoBehaviour
                 player.Damage();
             }
         }
-        
-        //this.gameObject.SetActive(false);
     }
    
 }
