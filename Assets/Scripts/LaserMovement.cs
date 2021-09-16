@@ -18,6 +18,5 @@ public class LaserMovement : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
-
     }
 }
